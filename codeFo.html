@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>佛曰</title>
+    <style>
+        .bodySay {
+            float: left;
+            width: 50%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<pre>
+ *                             _ooOoo_
+ *                            o8888888o
+ *                            88" . "88
+ *                            (| -_- |)
+ *                            O\  =  /O
+ *                         ____/`---'\____
+ *                       .'  \\|     |//  `.
+ *                      /  \\|||  :  |||//  \                           *   *
+ *                     /  _||||| -:- |||||-  \                           *  *
+ *                     |   | \\\  -  /// |   |                  ***************
+ *                     | \_|  ''\---/''  |   |                           *  *
+ *                     \  .-\__  `-`  ___/-. /                          *   *
+ *                   ___`. .'  /--.--\  `. . __
+ *                ."" '<  `.___\_<|>_/___.'  >'"".
+ *               | | :  `- \`.;`\ _ /`;.`/ - ` : | |
+ *               \  \ `-.   \_ __\ /__ _/   .-` /  /
+ *          ======`-.____`-.___\_____/___.-`____.-'======
+ *                             `=---='
+ *          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+</pre>
+
+
+<pre style="    transition: 0.6s;
+    transform-style: preserve-3d;
+    transform: rotateY(180deg);
+    float: right;
+    margin-top: -300px;">
+ *                             _ooOoo_
+ *                            o8888888o
+ *                            88" . "88
+ *                            (| -_- |)
+ *                            O\  =  /O
+ *                         ____/`---'\____
+ *                       .'  \\|     |//  `.
+ *                      /  \\|||  :  |||//  \                           *   *
+ *                     /  _||||| -:- |||||-  \                           *  *
+ *                     |   | \\\  -  /// |   |                  ***************
+ *                     | \_|  ''\---/''  |   |                           *  *
+ *                     \  .-\__  `-`  ___/-. /                          *   *
+ *                   ___`. .'  /--.--\  `. . __
+ *                ."" '<  `.___\_<|>_/___.'  >'"".
+ *               | | :  `- \`.;`\ _ /`;.`/ - ` : | |
+ *               \  \ `-.   \_ __\ /__ _/   .-` /  /
+ *          ======`-.____`-.___\_____/___.-`____.-'======
+ *                             `=---='
+ *          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+</pre>
+<div id="showLoad"
+     style="display: none;position: absolute;left: 50%;margin-left:-40px;top: 140px;width: 80px;text-align: center">交流中
+</div>
+
+<div class="bodySay">
+    人曰：
+    <textarea id="r" style="    width: 90%;
+    height: 200px;"></textarea> <a onclick="doFo()" href="javascript:void(0)"> 颂</a>
+
+</div>
+<div class="bodySay">
+    佛曰:
+    <textarea id="f" style="    width: 90%;
+    height: 200px;"></textarea> <a onclick="doRen()" href="javascript:void(0)"> 译</a>
+</div>
+</body>
+<script src="./jquery.js"></script>
+<script>
+    function doFo() {
+        let r = $('#r').val()
+        console.log(1, r)
+        if (!r) {
+            alert('佛曰你没说话' + r)
+            return
+        }
+        $('#showLoad').show();
+        $('#f').val('佛正在思考')
+        $.post('./foTaskEDCode.php', {r: r}, function (e) {
+            $('#f').val(e)
+            $('#showLoad').hide();
+        })
+    }
+
+    function doRen() {
+        let r = $('#f').val();
+        if (!r) {
+            alert('佛曰我没说话')
+            return
+        }
+        $('#showLoad').show();
+        $('#r').val("你正在思考")
+        $.post('./foTaskEDCode.php', {f: r}, function (e) {
+            $('#r').val(e)
+            $('#showLoad').hide();
+        })
+    }
+</script>
+</html>
